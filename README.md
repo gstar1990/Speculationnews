@@ -28,7 +28,8 @@ Example:
 ```
 
 
-![Picture1](SUEsummary.png)
+![Picture1](beta_news_opt.png)
+![Picture2](beta_news_dis.png)
 
 
 ```R
