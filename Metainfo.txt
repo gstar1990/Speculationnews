@@ -1,0 +1,21 @@
+Name of QuantLet:  Speculationnews
+
+Published in:      
+
+Description:       Generates beta weight news optimism and news dispersion index
+
+Keywords:          Media News, Sentiment, Information, Tone
+
+See also:          
+
+Author:            Guo Li
+
+Submitted:         Mon, September 5 2016 by Guo Li
+
+Datafile:          
+
+Input:  
+
+Output:  
+
+Example:           
