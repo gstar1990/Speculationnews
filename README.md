@@ -8,21 +8,21 @@ Name of QuantLet:  Speculationnews
 
 Published in:       
 
-Description:       Generates beta weight news optimism and news dispersion index
+Description:       'Generates beta weight news optimism and news dispersion index'
 
-Keywords:          Media News, Sentiment, Information, Tone
+Keywords:          'Media News, Sentiment, Information, Tone'
 
 See also:          
 
-Author:            Guo Li
+Author:            'Guo Li'
 
-Submitted:         Mon, September 5 2016 by Guo Li
+Submitted:         'Mon, September 5 2016 by Guo Li'
 
-Datafile:          
+Datafile:          'StreamReuters.RData, F-F_Research_Data_Factors_daily.CSV, disfinal.csv'
 
-Input:  
+Input:  'StreamReuters.RData, F-F_Research_Data_Factors_daily.CSV, disfinal.csv'
 
-Output:  
+Output:  'BetaFinal.csv'
 
 Example:           
 ```
@@ -34,23 +34,19 @@ Example:
 
 ```R
 setwd("c:~")
+library(data.table)
 ################################################
-
+#download "StreamReuters.RData" through following link: https://www.dropbox.com/s/cn1jp9l58vtc9cn/StreamReuters.RData?dl=0
+load("StreamReuters.RData") 
 fama                                                                = read.csv("F-F_Research_Data_Factors_daily.CSV")
-fama                                                                = fama[(which(as.numeric(as.character(fama[,1]))>=20030101 & 
-
-as.numeric(as.character(fama[,1]))<=20030108)[1]:which(as.numeric(as.character(fama[,1]))>=20141201 & as.numeric(as.character(fama[,1]))
-
-<=20141208)[1]),]
+fama                                                                = fama[(which(as.numeric(as.character(fama[,1]))>=20030101 & as.numeric(as.character(fama[,1]))<=20030108)[1]:which(as.numeric(as.character(fama[,1]))>=20141201 & as.numeric(as.character(fama[,1]))<=20141208)[1]),]
 fama[,2:5]                                                          =fama[,2:5]/100
 
 us                                                                  = as.matrix(price)
 
 date                                                                = as.Date(as.character(us[,1]),"%Y-%m-%d")
 us[,1]                                                              = format(date,"%Y%m%d")
-us                                                                  = us[(which(as.numeric(as.character(us[,1]))>=20030101 & as.numeric
-
-(as.character(us[,1]))<=20030108)[1]:which(as.numeric(as.character(us[,1]))>=20141201 & as.numeric(as.character(us[,1]))<=20141208)[1]),]
+us                                                                  = us[(which(as.numeric(as.character(us[,1]))>=20030101 & as.numeric(as.character(us[,1]))<=20030108)[1]:which(as.numeric(as.character(us[,1]))>=20141201 & as.numeric(as.character(us[,1]))<=20141208)[1]),]
 us                                                                  = as.matrix((us))
 us[is.na(us)]                                                       = 0
 us[,-1]                                                             = matrix(as.numeric(us[,-1]),nrow=nrow(us[,-1]))
@@ -136,13 +132,13 @@ BetaFinal                                                           = BetaF[,whi
 write.csv(BetaFinal,"BetaFinal.csv",row.names=F)    
 
 
-disfinal                                                            = read.csv("disfinal.csv")
-disfinal                                                            = as.data.table(disfinal)
-date                                                                = as.Date(disfinal[,date])
-beta_news_opt                                                       = scale(disfinal[,Sentiment])
-beta_news_dis                                                       = scale(disfinal[,disbeta])
-BW                                                                  = scale(disfinal[,BW])
-PLS                                                                 = scale(disfinal[,PLS])
+disfinal = read.csv("disfinal.csv")
+disfinal = as.data.table(disfinal)
+date = as.Date(disfinal[,date])
+beta_news_opt = scale(disfinal[,Sentiment])
+beta_news_dis = scale(disfinal[,disbeta])
+BW = scale(disfinal[,BW])
+PLS = scale(disfinal[,PLS])
 
 plot(date,beta_news_opt,type="l")
 lines(date,BW,type="l",col="red")
@@ -152,7 +148,6 @@ plot(date,beta_news_opt,type="l",ylim=c(-3.5,3.5),ylab="Sentiment")
 lines(date,BW,type="l",col="blue",lty =2)
 lines(date,PLS,type="l",col="red",lty=5)
 #lines(Date,Newssent1t,type="l",col="green",lty=5)
-lines(Date,scale(Rm),type="l",col="green",lty=5)
 legend("topright",legend = c("beta_news_opt", "BW","PLS"),
        text.width = strwidth("beta_news_opt"),
        lty=c(1,2,5),col=c("black","blue","red"), title = "Sentiment Types")
@@ -164,13 +159,9 @@ plot(date,beta_news_dis,type="l",ylim=c(-2,5),ylab="Sentiment")
 lines(date,BW,type="l",col="blue",lty =2)
 lines(date,PLS,type="l",col="red",lty=5)
 #lines(Date,Newssent1t,type="l",col="green",lty=5)
-lines(Date,scale(Rm),type="l",col="green",lty=5)
 legend("topright",legend = c("beta_news_dis", "BW","PLS"),
        text.width = strwidth("beta_news_opt"),
        lty=c(1,2,5),col=c("black","blue","red"), title = "Sentiment Types")
-
-
-
 
 
 

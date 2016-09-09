@@ -1,6 +1,8 @@
 setwd("c:~")
+library(data.table)
 ################################################
-
+#download "StreamReuters.RData" through following link: https://www.dropbox.com/s/cn1jp9l58vtc9cn/StreamReuters.RData?dl=0
+load("StreamReuters.RData") 
 fama                                                                = read.csv("F-F_Research_Data_Factors_daily.CSV")
 fama                                                                = fama[(which(as.numeric(as.character(fama[,1]))>=20030101 & as.numeric(as.character(fama[,1]))<=20030108)[1]:which(as.numeric(as.character(fama[,1]))>=20141201 & as.numeric(as.character(fama[,1]))<=20141208)[1]),]
 fama[,2:5]                                                          =fama[,2:5]/100
@@ -111,7 +113,6 @@ plot(date,beta_news_opt,type="l",ylim=c(-3.5,3.5),ylab="Sentiment")
 lines(date,BW,type="l",col="blue",lty =2)
 lines(date,PLS,type="l",col="red",lty=5)
 #lines(Date,Newssent1t,type="l",col="green",lty=5)
-lines(Date,scale(Rm),type="l",col="green",lty=5)
 legend("topright",legend = c("beta_news_opt", "BW","PLS"),
        text.width = strwidth("beta_news_opt"),
        lty=c(1,2,5),col=c("black","blue","red"), title = "Sentiment Types")
@@ -123,7 +124,6 @@ plot(date,beta_news_dis,type="l",ylim=c(-2,5),ylab="Sentiment")
 lines(date,BW,type="l",col="blue",lty =2)
 lines(date,PLS,type="l",col="red",lty=5)
 #lines(Date,Newssent1t,type="l",col="green",lty=5)
-lines(Date,scale(Rm),type="l",col="green",lty=5)
 legend("topright",legend = c("beta_news_dis", "BW","PLS"),
        text.width = strwidth("beta_news_opt"),
        lty=c(1,2,5),col=c("black","blue","red"), title = "Sentiment Types")
