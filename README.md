@@ -4,13 +4,14 @@
 
 
 ```yaml
-Name of QuantLet:  Speculationnews
+Name of QuantLet:  'Speculationnews'
 
 Published in:       
+ 
+Description:       'Plot market wide news optimism index and news disagreement index weighted by
+                    individual firm's market beta.'
 
-Description:       'Generates beta weight news optimism and news dispersion index'
-
-Keywords:          'Media News, Sentiment, Information, Tone'
+Keywords:          'Plot, Text Mining, Time-series, Media News, Sentiment, Disagreement'
 
 See also:          
 
@@ -20,11 +21,15 @@ Submitted:         'Mon, September 5 2016 by Guo Li'
 
 Datafile:          'StreamReuters.RData, F-F_Research_Data_Factors_daily.CSV, disfinal.csv'
 
-Input:  'StreamReuters.RData, F-F_Research_Data_Factors_daily.CSV, disfinal.csv'
+Input:             
 
-Output:  'BetaFinal.csv'
+Output:            'BetaFinal.csv'
 
 Example:           
+
+
+
+
 ```
 
 
@@ -132,13 +137,13 @@ BetaFinal                                                           = BetaF[,whi
 write.csv(BetaFinal,"BetaFinal.csv",row.names=F)    
 
 
-disfinal = read.csv("disfinal.csv")
-disfinal = as.data.table(disfinal)
-date = as.Date(disfinal[,date])
-beta_news_opt = scale(disfinal[,Sentiment])
-beta_news_dis = scale(disfinal[,disbeta])
-BW = scale(disfinal[,BW])
-PLS = scale(disfinal[,PLS])
+disfinal                                                            = read.csv("disfinal.csv")
+disfinal                                                            = as.data.table(disfinal)
+date                                                                = as.Date(disfinal[,date])
+beta_news_opt                                                       = scale(disfinal[,Sentiment])
+beta_news_dis                                                       = scale(disfinal[,disbeta])
+BW                                                                  = scale(disfinal[,BW])
+PLS                                                                 = scale(disfinal[,PLS])
 
 plot(date,beta_news_opt,type="l")
 lines(date,BW,type="l",col="red")

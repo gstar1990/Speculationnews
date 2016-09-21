@@ -97,13 +97,13 @@ BetaFinal                                                           = BetaF[,whi
 write.csv(BetaFinal,"BetaFinal.csv",row.names=F)    
 
 
-disfinal = read.csv("disfinal.csv")
-disfinal = as.data.table(disfinal)
-date = as.Date(disfinal[,date])
-beta_news_opt = scale(disfinal[,Sentiment])
-beta_news_dis = scale(disfinal[,disbeta])
-BW = scale(disfinal[,BW])
-PLS = scale(disfinal[,PLS])
+disfinal                                                            = read.csv("disfinal.csv")
+disfinal                                                            = as.data.table(disfinal)
+date                                                                = as.Date(disfinal[,date])
+beta_news_opt                                                       = scale(disfinal[,Sentiment])
+beta_news_dis                                                       = scale(disfinal[,disbeta])
+BW                                                                  = scale(disfinal[,BW])
+PLS                                                                 = scale(disfinal[,PLS])
 
 plot(date,beta_news_opt,type="l")
 lines(date,BW,type="l",col="red")
